@@ -11,9 +11,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
+  int _isactive_nav = 0;
+  int _isactive_filter = 0;
   List<String> name = [
-    "Vamshi", "Pandi", "Akshith", "Adarsh", "Meghana", "Sravanthi",
+    "Vamshi", "Nithanya", "Akshith", "Adarsh", "Meghana", "Sravanthi",
     "Sathwika", "Sriram", "Raj Kiran", "Abhinav", "Vishal",
     "Vyshnavi", "Pramod"
   ];
@@ -44,6 +45,7 @@ class _MyAppState extends State<MyApp> {
             ],
           ),
         ),
+        //Search
         body: Column(
           children: [
             // Search Bar
@@ -66,7 +68,7 @@ class _MyAppState extends State<MyApp> {
                         SizedBox(width: 20),
                         Icon(Icons.search, color: Colors.grey),
                         SizedBox(width: 20),
-                        Text("Ask Meta AI or Search", style: TextStyle(color: Colors.grey))
+                        Text("Ask Meta AI or Search", style: TextStyle(color: Colors.grey,fontWeight: FontWeight.bold))
                       ],
                     ),
                   ),
@@ -81,18 +83,26 @@ class _MyAppState extends State<MyApp> {
                 scrollDirection: Axis.horizontal,
                 itemCount: filter.length,
                 itemBuilder: (context, index) {
-                  return Padding(
+                  bool _isactive_F = _isactive_filter == index;
+                  return GestureDetector(
+                   onTap: () {
+                    setState(() {
+                      _isactive_filter=index;
+                    });
+                   },
+                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 5),
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 43, 43, 43),
+                        color: _isactive_F?const Color.fromARGB(43, 99, 196, 102):Color.fromARGB(255, 43, 43, 43),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Center(
-                        child: Text(filter[index], style: TextStyle(color: Colors.grey)),
+                        child: Text(filter[index], style: TextStyle(color: _isactive_F?Colors.green:Colors.grey,fontWeight: FontWeight.bold)),
                       ),
                     ),
+                  )
                   );
                 },
               ),
@@ -126,29 +136,40 @@ class _MyAppState extends State<MyApp> {
         bottomNavigationBar: BottomAppBar(
           color: Colors.black,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: List.generate(
-              bottomNav.length,
-              (index) => GestureDetector(
-                
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      navicons[index],
-                      color: Colors.grey,
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      bottomNav[index],
-                      style: TextStyle(
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
+            
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: List.generate(bottomNav.length, (index){
+                  bool _isactive = _isactive_nav== index;
+                  return Expanded(
+                    child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _isactive_nav = index;
+                      });
+                    },
+                    child: Container(
+                      decoration: BoxDecoration( color: _isactive ? Colors.black : Colors.transparent, borderRadius: BorderRadius.circular(10), // Optional rounded effect
+                       ),
+                      child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
+                          decoration: BoxDecoration(
+                            color: _isactive?const Color.fromARGB(43, 99, 196, 102):const Color.fromARGB(0, 255, 255, 255),
+                            borderRadius: BorderRadius.circular(20)
+                          ),
+                          child: Icon(navicons[index],color: _isactive?Colors.green:Colors.white),
+                        ),
+                        SizedBox(height: 5),
+                        Text(bottomNav[index],style: TextStyle(color: _isactive?Colors.green:Colors.grey),)
+                      ],
+                    )
+                    ))
+                  ); 
+            }
                 ),
-              ),
-            ),
+  
           ),
         ),
       ),
