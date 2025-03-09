@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:sampleflutter/pages/calls.dart';
 import 'package:sampleflutter/pages/update.dart';
 import 'package:sampleflutter/pages/Communities.dart';
 
 void main() {
-  runApp(Communities());
+  runApp(Calls());
 }
 
 class MyApp extends StatelessWidget {
@@ -12,10 +13,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(), // Make HomeScreen() the main widget
+      home: HomeScreen(),
       routes: {
         '/updates': (context) => Updates(),
-        '/Communities': (context) => Communities() // Define route for Updates page
+        '/Communities': (context) => Communities() 
       },
     );
   }
@@ -178,6 +179,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     context,
                     PageRouteBuilder(
                     pageBuilder: (context, animation, secondaryAnimation) => Communities(),
+                    transitionDuration: Duration.zero,
+                    reverseTransitionDuration: Duration.zero,
+                    ),
+                    );
+                  }
+                  else if(index == 3)
+                  {
+                    Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) => Calls(),
                     transitionDuration: Duration.zero,
                     reverseTransitionDuration: Duration.zero,
                     ),

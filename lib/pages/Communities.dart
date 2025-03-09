@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sampleflutter/main.dart';
 import 'package:intl/intl.dart';
+import 'package:sampleflutter/pages/calls.dart';
 import 'package:sampleflutter/pages/update.dart';
 
 class Communities extends StatelessWidget {
@@ -191,6 +192,17 @@ class _comstate extends State<_communities>{
                     ),
                     ); 
                  }
+                 else if(index == 3)
+                  {
+                    Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) => Calls(),
+                    transitionDuration: Duration.zero,
+                    reverseTransitionDuration: Duration.zero,
+                    ),
+                    );
+                  }
 
                 },
                 child: Container(

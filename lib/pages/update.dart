@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sampleflutter/main.dart';
 import 'package:intl/intl.dart';
 import 'package:sampleflutter/pages/Communities.dart';
+import 'package:sampleflutter/pages/calls.dart';
 
 class Updates extends StatelessWidget {
   @override
@@ -280,7 +281,17 @@ class _updatestate extends State<_updates>{
                     ),
                     ); 
                  }
-
+                 else if(index == 3)
+                  {
+                    Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) => Calls(),
+                    transitionDuration: Duration.zero,
+                    reverseTransitionDuration: Duration.zero,
+                    ),
+                    );
+                  }
                 },
                 child: Container(
                   decoration: BoxDecoration(
