@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sampleflutter/pages/update.dart';
+import 'package:sampleflutter/pages/Communities.dart';
 
 void main() {
-  runApp(Updates());
+  runApp(Communities());
 }
 
 class MyApp extends StatelessWidget {
@@ -13,7 +14,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: HomeScreen(), // Make HomeScreen() the main widget
       routes: {
-        '/updates': (context) => Updates(), // Define route for Updates page
+        '/updates': (context) => Updates(),
+        '/Communities': (context) => Communities() // Define route for Updates page
       },
     );
   }
@@ -38,7 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
+                                                                                                            //heading
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: Row(
@@ -59,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
-          // Search Bar
+                                                                                                              // Search Bar
           Container(
             color: Colors.black,
             height: 60,
@@ -86,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          // Filter Bar
+                                                                                                          // Filter Bar
           Container(
             height: 40,
             color: Colors.black,
@@ -117,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
           ),
-          // Chat List
+                                                                                                                    // Chat List
           Expanded(
             child: Container(
               color: Colors.black,
@@ -143,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      // Bottom Navigation Bar
+                                                                                                         // Bottom Navigation Bar
       bottomNavigationBar: BottomAppBar(
         color: Colors.black,
         child: Row(
@@ -163,6 +167,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     context,
                     PageRouteBuilder(
                     pageBuilder: (context, animation, secondaryAnimation) => Updates(),
+                    transitionDuration: Duration.zero,
+                    reverseTransitionDuration: Duration.zero,
+                    ),
+                    );
+                  }
+                  else if (index == 2)
+                  {
+                    Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) => Communities(),
                     transitionDuration: Duration.zero,
                     reverseTransitionDuration: Duration.zero,
                     ),

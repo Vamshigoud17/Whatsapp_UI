@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sampleflutter/main.dart';
 import 'package:intl/intl.dart';
+import 'package:sampleflutter/pages/Communities.dart';
 
 class Updates extends StatelessWidget {
   @override
@@ -35,7 +36,7 @@ class _updatestate extends State<_updates>{
   String date = DateFormat('dd MMM').format(DateTime.now());
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    // Header
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -55,7 +56,7 @@ class _updatestate extends State<_updates>{
           ],
         ),
       ),
-      
+      //scrollable area
       body: Expanded(
         child: SingleChildScrollView(
           child: Container(
@@ -63,6 +64,7 @@ class _updatestate extends State<_updates>{
         width: MediaQuery.of(context).size.width,
         child: Column(
         children: [
+                                                                                 //title
           SizedBox(height: 10),
          Padding(
           padding: EdgeInsets.only(left: 20),
@@ -72,6 +74,7 @@ class _updatestate extends State<_updates>{
             child: Text("Status",style: TextStyle(color: Colors.white,fontSize: 20),),
           ),
          ),SizedBox(height: 10),
+                                                                                                      //status
          Container(
           height: 180,
           width:double.infinity,
@@ -112,6 +115,7 @@ class _updatestate extends State<_updates>{
             },
           ),
          ),SizedBox(height: 10,),
+                                                                                                //channels
          Container(
           child: Padding(
             padding: EdgeInsets.only(left: 10,right: 10),
@@ -124,6 +128,7 @@ class _updatestate extends State<_updates>{
           ),
           ),
          ),
+                                                                                                   //channel list
          Container(
           padding: EdgeInsets.all(10),
           child: Padding(
@@ -161,6 +166,7 @@ class _updatestate extends State<_updates>{
            ),
           ),
           ),
+                                                                                                        //channels to follow
           SizedBox(height: 10),
           Container(
              alignment: Alignment.centerLeft,
@@ -171,6 +177,7 @@ class _updatestate extends State<_updates>{
              ],
             ),
           ),
+                                                                                                          //channel list to follow
           Container(
             padding: EdgeInsets.all(10),
             child: Padding(
@@ -210,6 +217,7 @@ class _updatestate extends State<_updates>{
               ),
               ),
           ),
+                                                                                                      //explore
           Container(
             alignment: Alignment.centerLeft,
             child: Row(
@@ -237,6 +245,7 @@ class _updatestate extends State<_updates>{
       ),
       )
       ),
+                                                                                                    //bottom nav  
       bottomNavigationBar: BottomAppBar(
         color: Colors.black,
         child: Row(
@@ -256,6 +265,16 @@ class _updatestate extends State<_updates>{
                     context,
                     PageRouteBuilder(
                     pageBuilder: (context, animation, secondaryAnimation) => MyApp(),
+                    transitionDuration: Duration.zero,
+                    reverseTransitionDuration: Duration.zero,
+                    ),
+                    ); 
+                 }
+                 else if(index==2){
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) => Communities(),
                     transitionDuration: Duration.zero,
                     reverseTransitionDuration: Duration.zero,
                     ),
