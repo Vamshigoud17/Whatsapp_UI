@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     
     return Scaffold(
-                                                                                                            //heading
+                                                                       //heading
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: Row(
@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
-                                                                                                              // Search Bar
+                                                                        // Search Bar
           Container(
             color: Colors.black,
             height: 60,
@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-                                                                                                          // Filter Bar
+                                                                              // Filter Bar
           Container(
             height: 40,
             color: Colors.black,
@@ -122,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
           ),
-                                                                                                                    // Chat List
+                                                                  // Chat List
           Expanded(
             child: Container(
               color: Colors.black,
@@ -148,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-                                                                                                         // Bottom Navigation Bar
+                                                             // Bottom Navigation Bar
       bottomNavigationBar: BottomAppBar(
         color: Colors.black,
         child: Row(

@@ -90,7 +90,35 @@ class _callstate extends State<_calls>{
             ),
             title: Text( "Add favorites",style: TextStyle(color: Colors.white),),
           )
-         )                                                         
+         ),
+         SizedBox(height: 10),
+          Padding(
+          padding: EdgeInsets.only(left: 20),
+          child:  Container(
+            alignment: Alignment.topLeft,
+            color: Colors.black,
+            child: Text("Recent",style: TextStyle(color: Colors.white,fontSize: 20),),
+          ),
+         ), 
+         for (var name in name) 
+                  Container(
+                 
+                 margin: EdgeInsets.symmetric(vertical: 5), 
+                 child: ListTile(
+                
+                 contentPadding: EdgeInsets.symmetric(vertical: 5,horizontal: 10),
+                 leading: CircleAvatar(
+                  radius: 25,
+                  backgroundColor: Colors.white,
+                 ),
+                 title: Text(
+                     name,
+                     style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                  subtitle: Text(date,style: TextStyle(color: Colors.white),),
+                  trailing: Icon(Icons.call_outlined,color: Colors.white,),
+                  ),
+                  ),
         ],
       ),
       ),
