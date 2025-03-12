@@ -5,7 +5,7 @@ import 'package:sampleflutter/pages/update.dart';
 import 'package:sampleflutter/pages/Communities.dart';
 
 void main() {
-  runApp(Calls());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
