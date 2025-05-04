@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sampleflutter/pages/calls.dart';
+import 'package:sampleflutter/pages/chat.dart';
 import 'package:sampleflutter/pages/update.dart';
 import 'package:sampleflutter/pages/Communities.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       home: HomeScreen(),
       routes: {
         '/updates': (context) => Updates(),
-        '/Communities': (context) => Communities() 
+        '/communities': (context) => Communities(),
       },
     );
   }
@@ -30,28 +31,31 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _isactive_nav = 0;
   int _isactive_filter = 0;
+
   List<String> name = [
     "Vamshi", "Nithanya", "Akshith", "Adarsh", "Meghana", "Sravanthi",
     "Sathwika", "Sriram", "Raj Kiran", "Abhinav", "Vishal",
     "Vyshnavi", "Pramod"
   ];
-  List<IconData> navicons = [Icons.chat, Icons.update, Icons.group_add_outlined, Icons.call];
+
+  List<IconData> navicons = [
+    Icons.chat, Icons.update, Icons.group_add_outlined, Icons.call
+  ];
+
   List<String> filter = ["All", "Unread", "Favorites", "Groups", "+"];
   List<String> bottomNav = ["Chats", "Updates", "Communities", "Calls"];
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
-                                                                       //heading
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("WhatsApp", style: TextStyle(color: Colors.white)),
+            const Text("WhatsApp", style: TextStyle(color: Colors.white)),
             Row(
-              children: [
+              children: const [
                 Icon(Icons.qr_code_scanner, color: Colors.white),
                 SizedBox(width: 20),
                 Icon(Icons.camera_alt_outlined, color: Colors.white),
@@ -64,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
-                                                                        // Search Bar
+          // Search Bar
           Container(
             color: Colors.black,
             height: 60,
@@ -76,22 +80,26 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 40,
                   width: MediaQuery.of(context).size.width * 0.97,
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 43, 43, 43),
+                    color: const Color.fromARGB(255, 43, 43, 43),
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: Row(
-                    children: [
+                    children: const [
                       SizedBox(width: 20),
                       Icon(Icons.search, color: Colors.grey),
                       SizedBox(width: 20),
-                      Text("Ask Meta AI or Search", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold))
+                      Text(
+                        "Ask Meta AI or Search",
+                        style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+                      ),
                     ],
                   ),
                 ),
               ],
             ),
           ),
-                                                                              // Filter Bar
+
+          // Filter Bar
           Container(
             height: 40,
             color: Colors.black,
@@ -99,30 +107,40 @@ class _HomeScreenState extends State<HomeScreen> {
               scrollDirection: Axis.horizontal,
               itemCount: filter.length,
               itemBuilder: (context, index) {
-                bool _isactive_F = _isactive_filter == index;
+                bool isActive = _isactive_filter == index;
                 return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _isactive_filter = index;
-                      });
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 5),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                        decoration: BoxDecoration(
-                          color: _isactive_F ? const Color.fromARGB(43, 99, 196, 102) : Color.fromARGB(255, 43, 43, 43),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: Center(
-                          child: Text(filter[index], style: TextStyle(color: _isactive_F ? Colors.green : Colors.grey, fontWeight: FontWeight.bold)),
+                  onTap: () {
+                    setState(() {
+                      _isactive_filter = index;
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                      decoration: BoxDecoration(
+                        color: isActive
+                            ? const Color.fromARGB(43, 99, 196, 102)
+                            : const Color.fromARGB(255, 43, 43, 43),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Center(
+                        child: Text(
+                          filter[index],
+                          style: TextStyle(
+                            color: isActive ? Colors.green : Colors.grey,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ));
+                    ),
+                  ),
+                );
               },
             ),
           ),
-                                                                  // Chat List
+
+          // Chat List
           Expanded(
             child: Container(
               color: Colors.black,
@@ -130,31 +148,42 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: name.length,
                 itemBuilder: (context, index) {
                   String date = DateFormat('dd MMM').format(DateTime.now());
-                  return ListTile(
-                    title: Text(name[index], style: TextStyle(color: Colors.white)),
-                    subtitle: Text("Hello!", style: TextStyle(color: Colors.grey)),
-                    leading: Icon(Icons.circle, size: 50, color: Colors.grey),
-                    trailing: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(date, style: TextStyle(color: Colors.grey, fontSize: 12)),
-                        Icon(Icons.circle, color: Colors.green)
-                      ],
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Chatscreen(name: name[index]),
+                        ),
+                      );
+                    },
+                    child: ListTile(
+                      title: Text(name[index], style: const TextStyle(color: Colors.white)),
+                      subtitle: const Text("Hello!", style: TextStyle(color: Colors.grey)),
+                      leading: const Icon(Icons.circle, size: 50, color: Colors.grey),
+                      trailing: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(date, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                          const Icon(Icons.circle, color: Colors.green, size: 10),
+                        ],
+                      ),
                     ),
                   );
                 },
               ),
             ),
-          )
+          ),
         ],
       ),
-                                                             // Bottom Navigation Bar
+
+      // Bottom Navigation Bar
       bottomNavigationBar: BottomAppBar(
         color: Colors.black,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: List.generate(bottomNav.length, (index) {
-            bool _isactive = _isactive_nav == index;
+            bool isActive = _isactive_nav == index;
             return Expanded(
               child: GestureDetector(
                 onTap: () {
@@ -162,61 +191,58 @@ class _HomeScreenState extends State<HomeScreen> {
                     _isactive_nav = index;
                   });
 
-                 
-                  if (index == 1) {
+                  Widget? targetPage;
+                  switch (index) {
+                    case 1:
+                      targetPage = Updates();
+                      break;
+                    case 2:
+                      targetPage = Communities();
+                      break;
+                    case 3:
+                      targetPage = Calls();
+                      break;
+                  }
+
+                  if (targetPage != null) {
                     Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) => Updates(),
-                    transitionDuration: Duration.zero,
-                    reverseTransitionDuration: Duration.zero,
-                    ),
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) => targetPage!,
+                        transitionDuration: Duration.zero,
+                        reverseTransitionDuration: Duration.zero,
+                      ),
                     );
                   }
-                  else if (index == 2)
-                  {
-                    Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) => Communities(),
-                    transitionDuration: Duration.zero,
-                    reverseTransitionDuration: Duration.zero,
-                    ),
-                    );
-                  }
-                  else if(index == 3)
-                  {
-                    Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) => Calls(),
-                    transitionDuration: Duration.zero,
-                    reverseTransitionDuration: Duration.zero,
-                    ),
-                    );
-                  }
-                  setState(() {
-                    _isactive_nav = index;
-                  });
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    color: _isactive ? Colors.black : Colors.transparent,
+                    color: isActive ? Colors.black : Colors.transparent,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
+                        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 3),
                         decoration: BoxDecoration(
-                          color: _isactive ? const Color.fromARGB(43, 99, 196, 102) : const Color.fromARGB(0, 255, 255, 255),
+                          color: isActive
+                              ? const Color.fromARGB(43, 99, 196, 102)
+                              : Colors.transparent,
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: Icon(navicons[index], color: _isactive ? Colors.green : Colors.white),
+                        child: Icon(
+                          navicons[index],
+                          color: isActive ? Colors.green : Colors.white,
+                        ),
                       ),
-                      SizedBox(height: 5),
-                      Text(bottomNav[index], style: TextStyle(color: _isactive ? Colors.green : Colors.grey)),
+                      const SizedBox(height: 5),
+                      Text(
+                        bottomNav[index],
+                        style: TextStyle(
+                          color: isActive ? Colors.green : Colors.grey,
+                        ),
+                      ),
                     ],
                   ),
                 ),
